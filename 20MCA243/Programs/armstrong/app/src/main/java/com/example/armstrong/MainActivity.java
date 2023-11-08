@@ -5,22 +5,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-
 public class MainActivity extends AppCompatActivity {
-
     private EditText editTextNumber;
     private Button buttonCheck;
     private TextView textViewResult;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         editTextNumber = findViewById(R.id.editTextNumber);
         buttonCheck = findViewById(R.id.buttonCheck);
         textViewResult = findViewById(R.id.textViewResult);
-
         buttonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private boolean isArmstrongNumber(int num) {
         int originalNum = num;
         int result = 0;

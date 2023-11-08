@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Please enter a number", Toast.LENGTH_SHORT).show();
                 } else {
                     int number = Integer.parseInt(inputText);
-
                     if (number % 2 == 0) {
                         Toast.makeText(MainActivity.this, number + " is EVEN", Toast.LENGTH_SHORT).show();
                     } else {

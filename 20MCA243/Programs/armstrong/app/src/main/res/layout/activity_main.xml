@@ -9,25 +9,21 @@
     android:padding="16dp"
     android:gravity="center"
     tools:context=".MainActivity">
-
     <EditText
         android:id="@+id/editTextNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter a number"
         android:inputType="number" />
-
     <Button
         android:id="@+id/buttonCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Check Armstrong Number" />
-
     <TextView
         android:id="@+id/textViewResult"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textSize="18sp" />
-
 </LinearLayout>

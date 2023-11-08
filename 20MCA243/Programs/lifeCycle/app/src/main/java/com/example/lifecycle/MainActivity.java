@@ -1,66 +1,42 @@
 package com.example.lifecycle;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
-import android.widget.TextView;
-
+import android.util.Log;
 public class MainActivity extends AppCompatActivity {
-    private TextView textView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Button btnCreate = findViewById(R.id.btnCreate);
-        Button btnStart = findViewById(R.id.btnStart);
-        Button btnPause = findViewById(R.id.btnPause);
-        Button btnStop = findViewById(R.id.btnStop);
-        Button btnRestart = findViewById(R.id.btnRestart);
-        Button btnDestroy = findViewById(R.id.btnDestroy);
-
-        btnCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "onCreate() called", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "onStart() called", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "onPause() called", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "onStop() called", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnRestart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "onRestart() called", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnDestroy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "onDestroy() called", Toast.LENGTH_LONG).show();
-            }
-        });
+        Log.d("lifecycle","onCreate invoked");
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("lifecycle","onStart invoked");
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("lifecycle","onResume invoked");
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("lifecycle","onPause invoked");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("lifecycle","onStop invoked");
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("lifecycle","onRestart invoked");
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d("lifecycle","onDestroy invoked");
     }
 }
