@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:id="@+id/search"
+    android:title="Search"
+    android:icon="@drawable/ic_baseline_search_24"></item>
+    <item android:id="@+id/upload"
+        android:title="Upload"
+        android:icon="@drawable/ic_baseline_cloud_upload_24"></item>
+    <item android:id="@+id/copy"
+        android:title="Copy"
+        android:icon="@drawable/ic_baseline_content_copy_24"></item>
+    <item android:id="@+id/print"
+        android:title="Print"
+        android:icon="@drawable/ic_baseline_print_24"></item>
+    <item android:id="@+id/share"
+        android:title="Share"
+        android:icon="@drawable/ic_baseline_share_24"></item>
+    <item android:id="@+id/bookmark"
+        android:title="BookMark"
+        android:icon="@drawable/ic_baseline_bookmark_24"></item>
+
+</menu>
