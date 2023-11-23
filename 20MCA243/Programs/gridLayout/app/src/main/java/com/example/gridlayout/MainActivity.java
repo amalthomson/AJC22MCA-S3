@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         gv=findViewById(R.id.gv);
 
-        CustomAdaptor ca=new CustomAdaptor(MainActivity.this,c,img);
+        CustomAdaptor ca = new CustomAdaptor(MainActivity.this,c,img);
 
         gv.setAdapter(ca);
     }

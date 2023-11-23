@@ -1,9 +1,0 @@
-<resources>
-    <string-array name="countries">
-        <item>USA</item>
-        <item>Canada</item>
-        <item>UK</item>
-        <item>Germany</item>
-        <!-- Add more countries as needed -->
-    </string-array>
-</resources>

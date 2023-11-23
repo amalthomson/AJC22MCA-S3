@@ -47,11 +47,9 @@ public class CustomAdaptor extends BaseAdapter {
         tv.setText(c[position]);
         iv.setImageResource(img[position]);
 
-        // Add an OnClickListener to the ImageView
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Display a toast message with the text below the selected image
                 Toast.makeText(context, c[position], Toast.LENGTH_SHORT).show();
             }
         });
