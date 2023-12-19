@@ -1,0 +1,71 @@
+
+import numpy as np
+array = np.array([3, 2, 1, 2])
+print("Original array: ", array)
+print("Append (6,7,8): ",np.append(array, [6, 7, 8]))
+print("Insert Specific (10,11) at third second position: ", np.insert(array, 2, [10, 11]))
+print("Delete values (1,3): ", np.delete(array, [0, 2]))
+print("Unique element: ", np.unique(array))
+print("Sorted array: ", np.sort(array))
+np.savetxt('array.txt', array)
+load = np.loadtxt('array.txt')
+print("Loaded from array.txt: ", load)
+
+import numpy as np
+arr1 = np.array([1, 2, 3, 4, 5])
+arr2 = np.array([6, 7, 8, 9, 10])
+result_add = arr1 + arr2
+print("Sum of array: ", result_add)
+result_multiply = arr1 * arr2
+print("Product of array: ", result_multiply)
+print("Mean of array: ", np.mean(result_add))
+print("Max value: ", np.max(result_multiply))
+
+import numpy as np
+grades = np.array([85, 90, 78, 92, 88, 76, 95, 89, 84, 91])
+print("Average grade: ", np.mean(grades))
+filter_grade = grades[grades > 90]
+print("Number of Students scoring above 90: ", len(filter_grade))
+std_grade = np.std(grades)
+print("Standard deviation of grades: ", np.round(std_grade, decimals=2))
+
+import numpy as np
+from scipy.linalg import svd
+matrix_A = np.array([[1, 2, 3],[4, 5, 6],[7, 8, 9]])
+matrix_B = np.array([[9, 8, 7],[6, 5, 4],[3, 2, 1]])
+matrix_sum = matrix_A + matrix_B
+print("Sum of matrices: \n", matrix_sum)
+matrix_product = matrix_A * matrix_B
+print("Product of matrices: \n", matrix_product)
+matrix_dot = np.dot(matrix_A, matrix_B)
+print("Dot Product of matrices: \n", matrix_dot)
+matrix_A_transpose = np.transpose(matrix_A)
+print("Transpose of matrix A: \n", matrix_A_transpose)
+determinant_B = np.linalg.det(matrix_B)
+print("Determinant of matrix B: ", determinant_B)
+eigenvalues_A, eigenvectors_A = np.linalg.eig(matrix_A)
+print("Eigenvalues of matrix A: \n", eigenvalues_A)
+print("Eigenvectors of matrix A: \n", eigenvectors_A)
+U, s, VT = svd(matrix_A)
+print("SVD of Martrix A: ")
+print("U: ",U)
+print("s: ",s)
+print("VT: ",VT)
+
+import pandas as pd
+df = pd.read_csv("sales_data.csv")
+print(df.head())
+print("Number of rows: ", len(df))
+print("Number of columns: ", len(df.columns))
+print("Total Revenue: ", sum(df['Revenue']))
+
+import pandas as pd
+df = pd.read_csv("student_data.csv")
+print(df.head(), "\n")
+age = df[df['Age'] > 19]
+print("Students who are 20 years old or older: \n", age)
+print("\nAverage GPA of all students:",df['GPA'].mean().round(2))
+data1 = df.sort_values(by='GPA', ascending= False)
+print("\nTop 5 students with highest GPA: \n", data1.head(5))
+data2 = df.groupby('Age')['GPA'].mean().reset_index()
+print("\nAverage GPA by age group: \n", data2)

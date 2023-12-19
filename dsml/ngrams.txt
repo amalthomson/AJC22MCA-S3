@@ -1,0 +1,9 @@
+from nltk import bigrams, trigrams, word_tokenize
+sentence = "Natural language processing is fascinating."
+words = word_tokenize(sentence)
+unigrams_list = list(words)
+print("Unigrams:", unigrams_list)
+bigrams_list = list(bigrams(words))
+print("Bigrams:", bigrams_list)
+trigrams_list = list(trigrams(words))
+print("Trigrams:", trigrams_list)

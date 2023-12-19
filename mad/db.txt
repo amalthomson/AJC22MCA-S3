@@ -1,0 +1,180 @@
+activity_main
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="   Employee Database"
+        android:textSize="36dp"/>
+    <EditText
+        android:id="@+id/id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/text"
+        android:hint="ID" />
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/id"
+        android:layout_marginTop="16dp"
+        android:hint="Name" />
+    <EditText
+        android:id="@+id/dept"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:layout_marginTop="16dp"
+        android:hint="Department" />
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dept"
+        android:layout_marginTop="16dp"
+        android:hint="Phone Number" />
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/phone"
+        android:layout_marginTop="25dp">
+        <Button
+            android:id="@+id/insert"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Insert"
+            android:onClick="dbInsert"/>
+        <Button
+            android:id="@+id/read"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Read"
+            android:onClick="dbRead"/>
+        <Button
+            android:id="@+id/update"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Update"
+            android:onClick="dbUpdate"/>
+        <Button
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:text="Delete"
+            android:onClick="dbDelete"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonContainer"
+        android:layout_marginTop="16dp"
+        android:hint="Employee Details"/>
+</RelativeLayout>
+
+dbHelper
+package com.example.employeedb;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import androidx.annotation.Nullable;
+public class dbHelper extends SQLiteOpenHelper {
+    public dbHelper(@Nullable Context context) {
+        super(context, "empDB.db", null, 1);
+    }
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE tbl_Emp (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR(10), dept VARCHAR(20), phone VARCHAR(20))");
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+}
+
+MainActivity
+package com.example.employeedb;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+public class MainActivity extends AppCompatActivity {
+    EditText id, name, dept, phone;
+    TextView display;
+    dbHelper dbHelper = new dbHelper(this);
+    SQLiteDatabase db;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        db = dbHelper.getReadableDatabase();
+        db = dbHelper.getWritableDatabase();
+        id = findViewById(R.id.id);
+        name = findViewById(R.id.name);
+        dept = findViewById(R.id.dept);
+        phone = findViewById(R.id.phone);
+        display = findViewById(R.id.view);
+    }
+    public void dbInsert(View view) {
+        String n = name.getText().toString();
+        String d = dept.getText().toString();
+        String p = phone.getText().toString();
+        ContentValues data = new ContentValues();
+        data.put("name", n);
+        data.put("dept", d);
+        data.put("phone", p);
+        db.insert("tbl_Emp", null, data);
+        Toast.makeText(this, "Data Inserted", Toast.LENGTH_SHORT).show();
+    }
+    public void dbRead(View view) {
+        StringBuffer buffer = new StringBuffer();
+        Cursor cursor = db.rawQuery("Select * from tbl_Emp", null);
+        while (cursor.moveToNext()){
+            buffer.append("---------------------------------------------------------------------------"+"\n");
+            buffer.append("ID: "+cursor.getString(0)+"\n");
+            buffer.append("Name: "+cursor.getString(1)+"\n");
+            buffer.append("Department: "+cursor.getString(2)+"\n");
+            buffer.append("Phone: "+cursor.getString(3)+"\n");
+        }
+        display.setText(buffer.toString());
+    }
+    public void dbUpdate(View view) {
+        String i = id.getText().toString();
+        String n = name.getText().toString();
+        String d = dept.getText().toString();
+        String p = phone.getText().toString();
+        ContentValues data = new ContentValues();
+        data.put("id", i);
+        data.put("name", n);
+        data.put("dept", d);
+        data.put("phone", p);
+        db.update("tbl_Emp", data, "id="+i, null);
+        Toast.makeText(this, "Data Updated", Toast.LENGTH_SHORT).show();
+    }
+    public void dbDelete(View view) {
+        String i = id.getText().toString();
+        db.delete("tbl_Emp", "id="+i, null);
+        Toast.makeText(this, "Data Deleted", Toast.LENGTH_SHORT).show();
+    }
+}

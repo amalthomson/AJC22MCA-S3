@@ -1,0 +1,23 @@
+import numpy as np
+import matplotlib.pyplot as plt
+data = np.array([[2, 3], [3, 4], [5, 6], [9, 10], [10, 8], [12, 12]])
+k = 2
+centroids = data[np.random.choice(data.shape[0], k, replace=False)]
+num_iterations = 100
+for iteration in range(num_iterations):
+    distances = np.linalg.norm(data[:, np.newaxis] - centroids, axis=2)
+    labels = np.argmin(distances, axis=1)
+    print(labels)
+    plt.scatter(data[:, 0], data[:, 1], c=labels)
+    plt.scatter(centroids[:, 0], centroids[:, 1], c='red', marker='X', s=200)
+    plt.xlabel("X-axis")
+    plt.ylabel("Y-axis")
+    plt.title(f"Iteration {iteration}")
+    plt.show()
+    new_centroids = np.array([data[labels == i].mean(axis=0) for i in range(k)])
+    if np.array_equal(centroids, new_centroids):
+        break
+    centroids = new_centroids
+print(distances)
+print("Final Cluster Assignments:", labels)
+print("Final Cluster Centroids:", centroids)
